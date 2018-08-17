@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @DubboComponentScan(basePackages = "com.abc.rpc.service")
-public class DubboConfiguration {
+public class DubboConfigurer {
 
     @Bean
     public ApplicationConfig applicationConfig() {
@@ -40,6 +40,7 @@ public class DubboConfiguration {
     @Bean
     public ProviderConfig providerConfig() {
         ProviderConfig providerConfig = new ProviderConfig();
+        providerConfig.setValidation("true");
         providerConfig.setCluster("failfast");
         providerConfig.setRetries(2);
         providerConfig.setLoadbalance("leastactive");

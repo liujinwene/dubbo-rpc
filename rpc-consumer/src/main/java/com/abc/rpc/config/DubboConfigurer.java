@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @DubboComponentScan(basePackages = "com.abc.rpc.service")
-public class DubboConfiguration {
+public class DubboConfigurer {
 
     @Bean
     public ApplicationConfig applicationConfig() {
@@ -30,6 +30,7 @@ public class DubboConfiguration {
     @Bean
     public ConsumerConfig consumerConfig() {
         ConsumerConfig consumerConfig = new ConsumerConfig();
+        consumerConfig.setValidation("true");
         consumerConfig.setCheck(false);
         return consumerConfig;
     }

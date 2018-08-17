@@ -13,11 +13,12 @@ public class ContentRpcServiceImpl implements ContentRpcService {
 
     @Override
     public BaseRpcRespDTO<ContentRpcRespDTO> getContent(GetContentRpcReqDTO reqDTO) {
-        ContentRpcRespDTO respDTO = ContentRpcRespDTO.builder()
-                .id("123")
-                .name("test")
-                .desc("demo lo")
-                .build();
-        return BaseRpcRespDTO.success(respDTO);
+        throw new RuntimeException("test exception");
+//        ContentRpcRespDTO respDTO = ContentRpcRespDTO.builder()
+//                .id("123")
+//                .name("test")
+//                .desc("demo lo")
+//                .build();
+//        return BaseRpcRespDTO.success(respDTO);
     }
 }
