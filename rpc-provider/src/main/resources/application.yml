@@ -1,2 +1,0 @@
-dubbo.application.name: dubbo-provider
-dubbo.registry.address: zookeeper://172.17.171.24:2181

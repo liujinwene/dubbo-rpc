@@ -1,8 +1,6 @@
 package com.abc.rpc.config;
 
-import com.alibaba.dubbo.config.ApplicationConfig;
-import com.alibaba.dubbo.config.ConsumerConfig;
-import com.alibaba.dubbo.config.RegistryConfig;
+import com.alibaba.dubbo.config.*;
 import com.alibaba.dubbo.config.spring.context.annotation.DubboComponentScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,25 +12,25 @@ import org.springframework.context.annotation.Configuration;
 @DubboComponentScan(basePackages = "com.abc.rpc.service")
 public class DubboConfiguration {
 
-//    @Bean
+    @Bean
     public ApplicationConfig applicationConfig() {
         ApplicationConfig applicationConfig = new ApplicationConfig();
-        applicationConfig.setName("consumer-test");
+        applicationConfig.setName("dubbo-consumer");
         return applicationConfig;
     }
 
-//    @Bean
-    public ConsumerConfig consumerConfig() {
-        ConsumerConfig consumerConfig = new ConsumerConfig();
-        consumerConfig.setTimeout(3000);
-        return consumerConfig;
-    }
-
-//    @Bean
+    @Bean
     public RegistryConfig registryConfig() {
         RegistryConfig registryConfig = new RegistryConfig();
         registryConfig.setAddress("zookeeper://172.17.171.24:2181");
         registryConfig.setClient("curator");
         return registryConfig;
+    }
+
+    @Bean
+    public ConsumerConfig consumerConfig() {
+        ConsumerConfig consumerConfig = new ConsumerConfig();
+        consumerConfig.setCheck(false);
+        return consumerConfig;
     }
 }
