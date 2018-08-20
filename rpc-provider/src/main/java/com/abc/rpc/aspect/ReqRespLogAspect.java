@@ -1,5 +1,6 @@
 package com.abc.rpc.aspect;
 
+import com.abc.rpc.dto.resp.base.BaseRpcRespDTO;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -21,7 +22,7 @@ public class ReqRespLogAspect {
     public void webLog(){}
 
     @Around("webLog()")
-    public void around(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+    public Object around(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         // 1.接收到请求，记录请求内容
         String methodName = proceedingJoinPoint.getSignature().getDeclaringType().getSimpleName() + "." + proceedingJoinPoint.getSignature().getName();
         String reqData = JSON.toJSONString(proceedingJoinPoint.getArgs());
@@ -31,9 +32,11 @@ public class ReqRespLogAspect {
         try {
             Object respResult = proceedingJoinPoint.proceed();
             log.info("response success : {}", JSON.toJSONString(respResult));
+            return respResult;
         } catch (Exception e) {
             e.printStackTrace();
             log.info("response error : {}", e.getMessage());
+            return BaseRpcRespDTO.methodError();
         }
     }
 }
